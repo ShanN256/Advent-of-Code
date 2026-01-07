@@ -4,7 +4,7 @@ def getValue(line, num): #takes in the line being worked on and the number value
 
     if num == 12: #If the value is the first value, we iterate through line starting from the first digit
         for i in range(0, len(line)-(num-1)):
-            #len(line)-(num-1) , we limit the range of values we iterate through since there must be some digits left to be selected for our sequence
+            #len(line)-(num-1) , we limit the range of values we iterate through since there must be some digits left to be selected for our the remainder of the sequence
             #the range changes depending on the index of the digit we are finding for our sequence aswell as the index of the previously selected digit
             if int(line[i])>value:
                 value=int(line[i])
