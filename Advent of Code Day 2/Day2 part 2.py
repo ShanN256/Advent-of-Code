@@ -1,20 +1,24 @@
-with open("Day2 Test Input.txt", "rt") as f:
-    line=f.readline()
+with open("Day2 input.txt", "rt") as f:
+    line=f.readline() 
+    #Data is in one line so we just read the first line
 
-IDs=line.split(",")
+IDs=line.split(",") #ID ranges are split with commas, this function splits the string input into an array of String ID ranges separated by ","
 
-count=0
-for i in IDs: #"2433423-342443"
-    idRange=i.split("-")
+count=0 #We use variable to add up all the invalid ID values
+
+for i in IDs:  #"2433423-342443"
+    idRange=i.split("-")  #['5210718', '5346163']
+    print(idRange)
 
     for i in range(int(idRange[0]), int(idRange[1])+1):
 
         value=str(i) #Convert to String
 
-        #Logic to detect patterns in the value
-        b=0
+        
+        b=0 #Checks if a sequence has already been detected
 
-        if value[0]*len(value)==value:
+        #Logic to detect patterns in the value
+        if value[0]*len(value)==value and len(value)>1:
             count+=i
             print(value)
             b=1
@@ -47,18 +51,14 @@ for i in IDs: #"2433423-342443"
                 count+=i
                 b=1
                 print(value)
-
-
+        
         
 print("Answer:", count)
 
 """
-Checks if the first number is repeated
-Checks if length is divisible by two and sees if two halves are equal
-Say 6 length then you can have sets of 3 also
+Checks if the first number is repeated throughout the ID
+Checks if divisiable by 2
 Check if divisible by 3
 Check if divisible by 4
 Check if divisible by 5
 """
-
-#That logic allows for length of 3 times 1 equal to value
