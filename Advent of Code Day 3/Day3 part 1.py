@@ -5,7 +5,7 @@ count=0 #We count up all the values in this variable
 
 for line in lines: #Iterates through each line
     value=0 #Placeholder for the maximum value in a line
-    line=str(int(line)) #Remove '/n'
+    line=line.strip() #Remove '/n'
     indexes=[0, 0]
 
     #Get first largest number
@@ -20,7 +20,7 @@ for line in lines: #Iterates through each line
     for i in range(indexes[0]+1, len(line)):
         if int(line[i])>value:
             value=int(line[i])
-            indexes[i]=i #Storing the index of the largest number after the index of the previous largest number
+            indexes[1]=i #Storing the index of the largest number after the index of the previous largest number
 
     print("Line:", line, "Index:", indexes, "Value:", int(line[min(indexes)])*10 + int(line[max(indexes)]))
 
