@@ -1,7 +1,7 @@
-#Now we must run through the input, change the "@" to "-", another function to rewrite
+#Now we must run through the input, change the "@" to "x", create function to rewrite
 #loop around again, and check if the answer has changed, keep looping untill there is zero change
 
-with open("Day4 Input.txt", "rt") as f:
+with open("Day4 Test Input.txt", "rt") as f:
     lines=f.readlines() #Creates an array list of the rows in the input
 
 maxCollumn=len(lines[0].strip())
@@ -115,26 +115,26 @@ def checkCount(row, collumn):
 
 def positionRewrite(row, collumn):
     global lines
-    newRow=""
+    newRow="" #Temporary holds the new line as we construct it
     for i in range(maxCollumn):
-        if i != collumn-1:
+        if i != collumn-1: #If not the selected index, keep the position the same as before
             newRow+=lines[row-1][i]
         else:
             newRow+="x"
-    lines[row-1]=newRow
+    lines[row-1]=newRow #changes the recorded input to new
 
 
 def printInput():
-    for row in range(maxRow):
-        questionInput=""
-        for collumn in range(maxCollumn):
-            questionInput+=checkPosition(row+1, collumn+1)
-        print(questionInput)
+    #Prints as seperate strings for rows rather than array list format
+    for line in lines:
+        print(line)
 
 def move():
     global lines
     global answer
-    count=0
+
+    count=0 #We store the number of @'s moved during each run
+    #Store indexes of movable "@"
     rows=[]
     collumns=[]
 
@@ -147,17 +147,18 @@ def move():
                 rows.append(row+1)
                 collumns.append(collumn+1)
 
+    #Rewrites input with all possible "@"s moved
+    for i in range(len(rows)):
+        positionRewrite(rows[i], collumns[i])
+
+    #Initially i tried to rewrite the input as i count the @'s movable however i ran into indexing issues
+    #So i stored the indexes separately and rewrote everything at the end not while counting movable @'s
+
+    print("Removed", len(rows), "@'s:")
     printInput()
     print()
 
-    #Rewrites input
-    for i in range(len(rows)):
-        positionRewrite(rows[i], collumns[i])
-    print("Removed", len(rows), "@'s \n")
-
-    printInput()
-
-    answer+=count
+    answer+=count #Add up the number of "@"s moved after each run
 
     if count>0:
         return True
@@ -168,10 +169,9 @@ def move():
     
     
 answer=0
-while True:
+while True: #Loops through runs until no movable @'s are found
     if move()==False:
         break
-#print("\nAnswer:", answer)
 
 
 
