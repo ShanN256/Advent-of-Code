@@ -1,3 +1,5 @@
+#This code does not provide an exact solution, but something close
+#There is an issue I have not found yet
 y=0
 w=50
 count=0
